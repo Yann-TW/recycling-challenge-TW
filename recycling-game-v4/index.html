@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07182b">
+  <meta name="description" content="A fast regional recycling challenge: sort 20 items in five seconds each.">
+  <title>Tradeweb Recycling Challenge</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%2307182b%22/><text x=%2250%22 y=%2266%22 text-anchor=%22middle%22 font-size=%2254%22>♻</text></svg>">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Return to challenge home">
+        <span class="brand-symbol"><i></i><i></i><i></i></span>
+        <span><strong>TRADEWEB</strong><small>Recycling Challenge</small></span>
+      </a>
+      <button id="howToButton" class="utility-button" type="button"><span>?</span> How to play</button>
+    </header>
+
+    <section id="landingScreen" class="screen active" aria-labelledby="landingTitle">
+      <div class="hero">
+        <div class="hero-copy">
+          <p class="overline">SUSTAINABILITY · REGIONAL CHALLENGE</p>
+          <h1 id="landingTitle">Sort faster.<br><em>Waste smarter.</em></h1>
+          <p class="lede">Classify 20 everyday items before the five-second timer expires. Build streaks, earn bonuses and represent your region.</p>
+          <div class="market-strip" aria-label="Game highlights">
+            <span><b>20</b> items</span><span><b>5s</b> per answer</span><span><b>100</b> item pool</span>
+          </div>
+          <div class="scoring-card">
+            <div class="section-label"><span>SCORING MODEL</span><span>LIVE</span></div>
+            <div class="score-rules">
+              <div><b>+1</b><span>Correct</span></div><div><b>−1</b><span>Wrong / timeout</span></div>
+              <div><b>+1</b><span>Under 2 seconds</span></div><div><b>+2</b><span>Every 5-answer streak</span></div>
+              <div><b>+5</b><span>Perfect 20/20</span></div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="terminal-card" aria-labelledby="regionHeading">
+          <div class="terminal-head"><span>CHALLENGE SETUP</span><span class="status-dot">READY</span></div>
+          <h2 id="regionHeading">Select your region</h2>
+          <p>Your region and final score will appear on the result screen.</p>
+          <div class="regions" role="radiogroup" aria-label="Choose your region">
+            <button class="region-option" data-region="US" type="button" aria-pressed="false"><span class="flag">US</span><span><b>United States</b><small>Americas</small></span><i>→</i></button>
+            <button class="region-option" data-region="UK" type="button" aria-pressed="false"><span class="flag">UK</span><span><b>United Kingdom</b><small>Europe</small></span><i>→</i></button>
+            <button class="region-option" data-region="APAC" type="button" aria-pressed="false"><span class="flag">AP</span><span><b>Asia-Pacific</b><small>APAC</small></span><i>→</i></button>
+          </div>
+          <div class="category-legend">
+            <span class="recycle">♻ Recyclable</span><span class="food">● Food</span><span class="residual">■ Non-recyclable</span>
+          </div>
+          <button id="startButton" class="primary-button" type="button" disabled>SELECT A REGION</button>
+        </aside>
+      </div>
+    </section>
+
+    <section id="gameScreen" class="screen" aria-labelledby="gameTitle">
+      <div class="ticker">
+        <span>REGION <b id="regionDisplay">UK</b></span><span>ITEM <b><i id="itemNumber">1</i>/20</b></span><span>SCORE <b id="scoreDisplay">0</b></span><span>STREAK <b id="streakDisplay">0</b></span>
+      </div>
+      <div class="progress-track"><div id="roundProgress" class="round-progress"></div></div>
+      <div class="game-layout">
+        <section class="question-panel">
+          <div class="question-head"><div><p class="overline">CLASSIFY ITEM</p><h2 id="gameTitle">Choose one waste stream</h2></div><div class="timer-orb"><span id="timerText">5.0</span><small>SEC</small></div></div>
+          <div id="timerTrack" class="timer-track"><div id="timerBar" class="timer-bar"></div></div>
+          <article id="wasteCard" class="waste-card">
+            <div id="itemIcon" class="item-icon" aria-hidden="true">🧴</div>
+            <div><h3 id="itemName">Plastic water bottle</h3><p id="itemDescription">Empty and rinsed household bottle</p></div>
+          </article>
+          <div id="feedback" class="feedback" aria-live="polite"></div>
+        </section>
+
+        <section class="choice-panel" aria-label="Waste categories">
+          <p class="choice-instruction">CLICK ONCE TO SUBMIT</p>
+          <button class="bin recyclable-bin" data-bin="recyclable" type="button"><span class="key">1</span><span class="choice-icon">♻</span><span><b>Recyclable</b><small>Paper, card, cans, glass and accepted plastics</small></span></button>
+          <button class="bin food-bin" data-bin="food" type="button"><span class="key">2</span><span class="choice-icon">●</span><span><b>Food waste</b><small>Scraps, leftovers, peelings and food contents</small></span></button>
+          <button class="bin residual-bin" data-bin="residual" type="button"><span class="key">3</span><span class="choice-icon">■</span><span><b>Non-recyclable</b><small>Contaminated, mixed-material and residual waste</small></span></button>
+          <p class="keyboard-hint">Keyboard: 1, 2 or 3</p>
+        </section>
+      </div>
+    </section>
+
+    <section id="endScreen" class="screen" aria-labelledby="endTitle">
+      <div class="result-card">
+        <div class="result-glow" aria-hidden="true"></div>
+        <p class="overline">SESSION COMPLETE</p>
+        <div id="endBadge" class="end-badge">Excellent result</div>
+        <h2 id="endTitle">Your regional score is in.</h2>
+        <p id="endMessage">You added points for your region.</p>
+        <div class="hero-score"><strong id="finalScore">0</strong><span>POINTS</span></div>
+        <div class="result-grid">
+          <div><span>REGION</span><b id="finalRegion">UK</b></div><div><span>ACCURACY</span><b id="accuracyDisplay">0%</b></div>
+          <div><span>CORRECT</span><b><i id="correctCount">0</i>/20</b></div><div><span>BEST STREAK</span><b id="bestStreak">0</b></div>
+        </div>
+        <div id="bonusSummary" class="bonus-summary"></div>
+        <div class="end-actions"><button id="playAgainButton" class="primary-button" type="button">PLAY AGAIN</button><button id="copyScoreButton" class="secondary-button" type="button">COPY SCORE</button></div>
+        <p class="share-note">Take a screenshot and post it in the campaign thread so your score counts for <b id="shareRegion">your region</b>.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+      <button id="closeModalButton" class="modal-close" type="button" aria-label="Close dialog">×</button>
+      <p class="overline">GAME RULES</p><h2 id="modalTitle">How to play</h2>
+      <ol><li>Select US, UK or APAC.</li><li>For each item, click Recyclable, Food waste or Non-recyclable.</li><li>Answer within five seconds. Your first click is final.</li><li>Fast answers, streaks and a perfect game earn bonus points.</li></ol>
+      <button id="modalDoneButton" class="primary-button" type="button">GOT IT</button>
+    </div>
+  </div>
+
+  <script src="assets/js/items.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
